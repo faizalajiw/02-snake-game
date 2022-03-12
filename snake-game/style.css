@@ -1,0 +1,9 @@
+.body {
+    background: url("./assets/bg.jpg");
+    min-height: 97vh;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    justify-content: left;
+    align-items: center;
+    margin-left: 10%;
+}
