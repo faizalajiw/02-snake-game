@@ -4,12 +4,12 @@ const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
 const DIRECTION = {
-    LEFT: 0,
-    RIGHT: 1,
-    UP: 2,
-    DOWN: 3,
-}
-// Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
+        LEFT: 0,
+        RIGHT: 1,
+        UP: 2,
+        DOWN: 3,
+    }
+    // Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
 function initPosition() {
@@ -49,18 +49,18 @@ let snake1 = {
     score: 0,
 }
 let snake2 = {
-    color: "blue",
+    color: "yellow",
     ...initHeadAndBody(),
     direction: initDirection(),
     score: 0,
 }
 let snake3 = {
-    color: "blue",
-    ...initHeadAndBody(),
-    direction: initDirection(),
-    score: 0,
-}
-// Atur Karakter1
+        color: "blue",
+        ...initHeadAndBody(),
+        direction: initDirection(),
+        score: 0,
+    }
+    // Atur Karakter1
 const head1 = new Image();
 head1.src = "./assets/head1.png";
 const body1 = new Image();
@@ -123,7 +123,7 @@ function draw() {
         for (let i = 1; i < snake1.body.length; i++) {
             ctx.drawImage(body1, snake1.body[i].x * CELL_SIZE, snake1.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
-        
+
         // karakter ular2
         ctx.drawImage(head2, snake2.head.x * CELL_SIZE, snake2.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake2.body.length; i++) {
@@ -219,8 +219,8 @@ function checkCollision(snakes) {
         audio.play();
 
         alert("Game over");
-        snake1 = initSnake("purple");
-        snake2 = initSnake("blue");
+        snake1 = initSnake("red");
+        snake2 = initSnake("yellow");
     }
     return isCollide;
 }
@@ -270,7 +270,7 @@ function turn(snake, direction) {
 }
 
 // Mengatur kendali snake1
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {
         turn(snake1, DIRECTION.LEFT);
     } else if (event.key === "ArrowRight") {
@@ -280,7 +280,7 @@ document.addEventListener("keydown", function (event) {
     } else if (event.key === "ArrowDown") {
         turn(snake1, DIRECTION.DOWN);
     }
-// Mengatur kendali snake2
+    // Mengatur kendali snake2
     if (event.key === "a") {
         turn(snake2, DIRECTION.LEFT);
     } else if (event.key === "d") {
@@ -290,7 +290,7 @@ document.addEventListener("keydown", function (event) {
     } else if (event.key === "s") {
         turn(snake2, DIRECTION.DOWN);
     }
-// Mengatur kendali snake3
+    // Mengatur kendali snake3
     if (event.key === "j") {
         turn(snake3, DIRECTION.LEFT);
     } else if (event.key === "l") {
