@@ -1,7 +1,7 @@
 .body {
-    background: url("./assets/bg.jpg");
+    background: url("./assets/bg3.jpg");
     min-height: 97vh;
-    background-size: 100vw 100vh;
+    background-size: 100vw 120vh;
     background-repeat: no-repeat;
     justify-content: left;
     align-items: center;
