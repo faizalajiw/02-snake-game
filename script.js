@@ -260,8 +260,9 @@ function checkCollision(snakes) {
         audio.play();
 
         alert("Game over");
-        snake1 = initSnake("red");
+        snake1 = initSnake("blue");
         snake2 = initSnake("yellow");
+        snake3 = initSnake("red");
     }
     return isCollide;
 }
