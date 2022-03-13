@@ -3,6 +3,25 @@ const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
+
+//Karakter ular 1
+const kepala1 = new Image();
+kepala1.src = "./assets/head1copy.png";
+const bodi1 = new Image();
+bodi1.src = "./assets/pokemon.png";
+
+//Karakter ular 2
+const kepala2 = new Image();
+kepala2.src = "./assets/head2copy.png";
+const bodi2 = new Image();
+bodi2.src = "./assets/pokemon.png";
+
+//Karakter ular 3
+const kepala3 = new Image();
+kepala3.src = "./assets/head3copy.png";
+const bodi3 = new Image();
+bodi3.src = "./assets/pokemon.png";
+
 const DIRECTION = {
     LEFT: 0,
     RIGHT: 1,
@@ -21,7 +40,7 @@ function initPosition() {
 
 function initHeadAndBody() {
     let head = initPosition();
-    let body = [{x: head.x, y: head.y}];
+    let body = [{ x: head.x, y: head.y }];
     return {
         head: head,
         body: body,
@@ -40,6 +59,7 @@ function initSnake(color) {
         score: 0,
     }
 }
+
 // deklarasi karakter ular
 let snake1 = {
     color: "red",
@@ -79,13 +99,14 @@ body3.src = "./assets/body3.png";
 
 // deklarasi karakter apel
 let apples = [{
-    color: "red",
-    position: initPosition(),
-},
-{
-    color: "green",
-    position: initPosition(),
-}]
+        color: "red",
+        position: initPosition(),
+    },
+    {
+        color: "green",
+        position: initPosition(),
+    }
+]
 
 function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
@@ -170,7 +191,7 @@ function eat(snake, apples) {
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
-            snake.body.push({x: snake.head.x, y: snake.head.y});
+            snake.body.push({ x: snake.head.x, y: snake.head.y });
         }
     }
 }
