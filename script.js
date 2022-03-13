@@ -57,9 +57,11 @@ let drink = {
 };
 
 let level = [{
+        //level 1
         speed: 120,
     },
     {
+        //level 2
         speed: 110,
         wall: [{
             start: {
@@ -73,6 +75,7 @@ let level = [{
         }],
     },
     {
+        //level 3
         speed: 100,
         wall: [{
                 start: {
@@ -97,6 +100,7 @@ let level = [{
         ],
     },
     {
+        // level 4
         speed: 90,
         wall: [{
                 start: {
@@ -121,6 +125,7 @@ let level = [{
         ],
     },
     {
+        // level 5
         speed: 80,
         wall: [{
                 start: {
@@ -248,7 +253,7 @@ function draw() {
         }
 
         if (checkPrime(snake.score)) {
-            insertImage(ctx, drink.position.x, drink.position.y, "drink");
+            insertImage(ctx, drink.position.x, drink.position.y, "poison");
         }
     }, REDRAW_INTERVAL);
 }
