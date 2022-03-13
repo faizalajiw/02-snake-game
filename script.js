@@ -1,4 +1,4 @@
-const CELL_SIZE = 20;
+const CELL_SIZE = 30;
 const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
