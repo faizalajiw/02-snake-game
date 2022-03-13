@@ -46,7 +46,7 @@ function initSnake(color) {
 
 // deklarasi karakter ular
 let snake1 = {
-    color: "red",
+    color: "blue",
     ...initHeadAndBody(),
     direction: initDirection(),
     score: 0,
@@ -58,7 +58,7 @@ let snake2 = {
     score: 0,
 }
 let snake3 = {
-    color: "blue",
+    color: "red",
     ...initHeadAndBody(),
     direction: initDirection(),
     score: 0,
