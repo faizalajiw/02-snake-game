@@ -31,7 +31,7 @@ const DIRECTION = {
     // Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
-let nyawasnake = 3;
+// let nyawasnake = 3;
 
 function initPosition() {
     return {
@@ -58,7 +58,7 @@ function initSnake(color) {
         color: color,
         ...initHeadAndBody(),
         direction: initDirection(),
-        nyawasnake: 3,
+        // nyawasnake: 3,
         score: 0,
     }
 }
@@ -83,9 +83,9 @@ let snake3 = {
     score: 0,
 }
 
-let nyawa = {
-    position: initPosition()
-}
+// let nyawa = {
+//     position: initPosition()
+// }
 
 // Atur Karakter1
 const head1 = new Image();
@@ -122,24 +122,24 @@ function drawCell(ctx, x, y, color) {
 }
 
 // nyawa board
-function drawNyawa(snake) {
-    let NyawaCanvas;
-    NyawaCanvas = document.getElementById("nyawaBoard");
-    let NyawaCtx = NyawaCanvas.getContext("2d");
-    let nyawaX = 10;
-    let nyawaY = 5;
-    let cell = 15;
-    NyawaCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-    for (let i = 1; i <= snake.nyawa; i++) {
-        var img = document.getElementById("nyawa");
-        if (i % 11 == 0) {
-            nyawaY += 25;
-            nyawaX = 10
-        }
-        NyawaCtx.drawImage(img, nyawaX, nyawaY, cell, cell);
-        nyawaX += 20;
-    }
-}
+// function drawNyawa(snake) {
+//     let NyawaCanvas;
+//     NyawaCanvas = document.getElementById("nyawaBoard");
+//     let NyawaCtx = NyawaCanvas.getContext("2d");
+//     let nyawaX = 10;
+//     let nyawaY = 5;
+//     let cell = 15;
+//     NyawaCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+//     for (let i = 1; i <= snake.nyawa; i++) {
+//         var img = document.getElementById("nyawa");
+//         if (i % 11 == 0) {
+//             nyawaY += 25;
+//             nyawaX = 10
+//         }
+//         NyawaCtx.drawImage(img, nyawaX, nyawaY, cell, cell);
+//         nyawaX += 20;
+//     }
+// }
 
 // Untuk menampilkan score board
 function drawScore(snake) {
