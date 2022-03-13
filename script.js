@@ -31,6 +31,8 @@ const DIRECTION = {
     // Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
+let nyawasnake = 3;
+
 function initPosition() {
     return {
         x: Math.floor(Math.random() * WIDTH),
@@ -56,6 +58,7 @@ function initSnake(color) {
         color: color,
         ...initHeadAndBody(),
         direction: initDirection(),
+        nyawasnake: 3,
         score: 0,
     }
 }
@@ -74,12 +77,17 @@ let snake2 = {
     score: 0,
 }
 let snake3 = {
-        color: "blue",
-        ...initHeadAndBody(),
-        direction: initDirection(),
-        score: 0,
-    }
-    // Atur Karakter1
+    color: "blue",
+    ...initHeadAndBody(),
+    direction: initDirection(),
+    score: 0,
+}
+
+let nyawa = {
+    position: initPosition()
+}
+
+// Atur Karakter1
 const head1 = new Image();
 head1.src = "./assets/head1.png";
 const body1 = new Image();
@@ -111,6 +119,26 @@ let apples = [{
 function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
+// nyawa board
+function drawNyawa(snake) {
+    let NyawaCanvas;
+    NyawaCanvas = document.getElementById("nyawaBoard");
+    let NyawaCtx = NyawaCanvas.getContext("2d");
+    let nyawaX = 10;
+    let nyawaY = 5;
+    let cell = 15;
+    NyawaCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    for (let i = 1; i <= snake.nyawa; i++) {
+        var img = document.getElementById("nyawa");
+        if (i % 11 == 0) {
+            nyawaY += 25;
+            nyawaX = 10
+        }
+        NyawaCtx.drawImage(img, nyawaX, nyawaY, cell, cell);
+        nyawaX += 20;
+    }
 }
 
 // Untuk menampilkan score board
@@ -158,14 +186,25 @@ function draw() {
         // karakter 2 apel
         for (let i = 0; i < apples.length; i++) {
             let apple = apples[i];
-
             var img = document.getElementById("apple");
             ctx.drawImage(img, apple.position.x * CELL_SIZE, apple.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
+        // let prima = 0;
+        // for (let k = 1; k <= snake.score; k++) {
+        //     if (snake.score % k == 0) {
+        //         prima++;
+        //     }
+        // }
+        // if (prima == 2) {
+        //     var img = document.getElementById("nyawa");
+        //     ctx.drawImage(img, nyawa.position.x * CELL_SIZE, nyawa.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        // }
+
         drawScore(snake1);
         drawScore(snake2);
         drawScore(snake3);
+        // drawNyawa(nyawa);
     }, REDRAW_INTERVAL);
 }
 
@@ -186,9 +225,11 @@ function teleport(snake) {
 
 // apples array
 function eat(snake, apples) {
+    var audio = new Audio('./assets/makan.mp3')
     for (let i = 0; i < apples.length; i++) {
         let apple = apples[i];
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
+            audio.play();
             apple.position = initPosition();
             snake.score++;
             snake.body.push({ x: snake.head.x, y: snake.head.y });
