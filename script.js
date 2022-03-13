@@ -3,25 +3,6 @@ const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
-
-//Karakter ular 1
-const kepala1 = new Image();
-kepala1.src = "./assets/head1copy.png";
-const bodi1 = new Image();
-bodi1.src = "./assets/pokemon.png";
-
-//Karakter ular 2
-const kepala2 = new Image();
-kepala2.src = "./assets/head2copy.png";
-const bodi2 = new Image();
-bodi2.src = "./assets/pokemon.png";
-
-//Karakter ular 3
-const kepala3 = new Image();
-kepala3.src = "./assets/head3copy.png";
-const bodi3 = new Image();
-bodi3.src = "./assets/pokemon.png";
-
 const DIRECTION = {
     LEFT: 0,
     RIGHT: 1,
