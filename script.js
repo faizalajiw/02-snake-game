@@ -22,7 +22,7 @@ function initPosition() {
 
 function initHeadAndBody() {
     let head = initPosition();
-    let body = [{x: head.x, y: head.y}];
+    let body = [{ x: head.x, y: head.y }];
     return {
         head: head,
         body: body,
@@ -44,40 +44,37 @@ function initSnake(color) {
 let snake = initSnake("blue");
 
 let apples = [{
-    position: initPosition(),
-},
-{
-    position: initPosition(),
-}];
+        position: initPosition(),
+    },
+    {
+        position: initPosition(),
+    }
+];
 
 let life = 3;
 let drink = {
     position: initPosition(),
 };
 
-let level = [
-    {
+let level = [{
         speed: 120,
     },
     {
         speed: 110,
-        wall: [
-            {
-                start: {
-                    x: 5,
-                    y: 15,
-                },
-                end: {
-                    x: 25,
-                    y: 15,
-                }
+        wall: [{
+            start: {
+                x: 5,
+                y: 15,
+            },
+            end: {
+                x: 25,
+                y: 15,
             }
-        ],
+        }],
     },
     {
         speed: 100,
-        wall: [
-            {
+        wall: [{
                 start: {
                     x: 5,
                     y: 12,
@@ -101,8 +98,7 @@ let level = [
     },
     {
         speed: 90,
-        wall: [
-            {
+        wall: [{
                 start: {
                     x: 0,
                     y: 15,
@@ -126,8 +122,7 @@ let level = [
     },
     {
         speed: 80,
-        wall: [
-            {
+        wall: [{
                 start: {
                     x: 0,
                     y: 15,
@@ -240,8 +235,8 @@ function draw() {
         ctx.font = "20px Arial";
 
         getCurrentLevel(ctx, snake.score);
-        ctx.fillText("Score : "+ snake.score, 485, 30);
-        ctx.fillText("Speed : "+ level[current_level].speed, 485, 50);
+        ctx.fillText("Score : " + snake.score, 485, 30);
+        ctx.fillText("Speed : " + level[current_level].speed, 485, 50);
 
         for (let i = 0; i < apples.length; i++) {
             let apple = apples[i];
@@ -281,7 +276,7 @@ function eat(snake, apples, drink) {
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
-            snake.body.push({x: snake.head.x, y: snake.head.y});
+            snake.body.push({ x: snake.head.x, y: snake.head.y });
             AUDIO_EAT.play();
         }
     }
@@ -290,7 +285,7 @@ function eat(snake, apples, drink) {
         let AUDIO_EAT = new Audio('assets/.mp3');
         drink.position = initPosition();
         snake.score++;
-        snake.body.push({x: snake.head.x, y: snake.head.y});
+        snake.body.push({ x: snake.head.x, y: snake.head.y });
         AUDIO_EAT.play();
         life++;
     }
@@ -343,7 +338,7 @@ function checkCollision() {
     if (isCollide) {
         life--;
         snake.body.splice(0, snake.body.length);
-        snake.body.push({x: snake.head.x, y: snake.head.y});
+        snake.body.push({ x: snake.head.x, y: snake.head.y });
         // sound game over
         if (life == 0) {
             let audio = new Audio('assets/game-over.mp3');
@@ -401,7 +396,7 @@ function turn(snake, direction) {
     }
 }
 // mengatur navigasi ular
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {
         turn(snake, DIRECTION.LEFT);
     } else if (event.key === "ArrowRight") {
