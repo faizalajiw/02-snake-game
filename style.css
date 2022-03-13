@@ -1,16 +1,15 @@
 .body {
-    background: url("./assets/bg3.jpg");
+    background: url("./assets/bg.jpg");
     min-height: 97vh;
     background-size: 100vw 120vh;
     background-repeat: no-repeat;
     justify-content: left;
     align-items: center;
-    margin-left: 10%;
 }
 
 .text {
     font-family: 'comic sans ms';
-    font-size: 35px;
+    font-size: 38px;
 }
 
 html {
