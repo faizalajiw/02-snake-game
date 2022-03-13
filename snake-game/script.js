@@ -4,13 +4,32 @@ const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
+
+//Karakter ular 1
+const kepala1 = new Image();
+kepala1.src = "./assets/head1.png";
+const bodi1 = new Image();
+bodi1.src = "./assets/pokemon.png";
+
+//Karakter ular 2
+const kepala2 = new Image();
+kepala2.src = "./assets/head2.png";
+const bodi2 = new Image();
+bodi2.src = "./assets/pokemon.png";
+
+//Karakter ular 3
+const kepala3 = new Image();
+kepala3.src = "./assets/head3.png";
+const bodi3 = new Image();
+bodi3.src = "./assets/pokemon.png";
+
 const DIRECTION = {
-    LEFT: 0,
-    RIGHT: 1,
-    UP: 2,
-    DOWN: 3,
-}
-// Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
+        LEFT: 0,
+        RIGHT: 1,
+        UP: 2,
+        DOWN: 3,
+    }
+    // Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
 function initPosition() {
@@ -22,7 +41,7 @@ function initPosition() {
 
 function initHeadAndBody() {
     let head = initPosition();
-    let body = [{x: head.x, y: head.y}];
+    let body = [{ x: head.x, y: head.y }];
     return {
         head: head,
         body: body,
@@ -41,20 +60,29 @@ function initSnake(color) {
         score: 0,
     }
 }
+
 let snake1 = initSnake("purple");
+// let snake1 = {
+//     color: "red",
+//     ...initHeadAndBody(),
+//     direction: initDirection(),
+//     score: 0
+// }
+
 let snake2 = initSnake("blue");
 // Soal no 6: add snake3
 let snake3 = initSnake("black");
 
 // Soal no 4: make apples array
 let apples = [{
-    color: "red",
-    position: initPosition(),
-},
-{
-    color: "green",
-    position: initPosition(),
-}]
+        color: "red",
+        position: initPosition(),
+    },
+    {
+        color: "green",
+        position: initPosition(),
+    }
+]
 
 function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
@@ -85,21 +113,23 @@ function draw() {
         let ctx = snakeCanvas.getContext("2d");
 
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-        
-        drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
+
+        //Ular 1
+        ctx.drawImage(kepala1, snake1.head.x * CELL_SIZE, snake1.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake1.body.length; i++) {
-            drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
+            ctx.drawImage(bodi1, snake1.body[i].x * CELL_SIZE, snake1.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
-        drawCell(ctx, snake2.head.x, snake2.head.y, snake2.color);
+        //Ular 2
+        ctx.drawImage(kepala2, snake2.head.x * CELL_SIZE, snake2.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake2.body.length; i++) {
-            drawCell(ctx, snake2.body[i].x, snake2.body[i].y, snake2.color);
+            ctx.drawImage(bodi2, snake2.body[i].x * CELL_SIZE, snake2.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
-        // Soal no 6: Draw Player 3
-        drawCell(ctx, snake3.head.x, snake3.head.y, snake3.color);
+        //Ular 3
+        ctx.drawImage(kepala3, snake3.head.x * CELL_SIZE, snake3.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake3.body.length; i++) {
-            drawCell(ctx, snake3.body[i].x, snake3.body[i].y, snake3.color);
+            ctx.drawImage(bodi3, snake3.body[i].x * CELL_SIZE, snake3.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
         for (let i = 0; i < apples.length; i++) {
@@ -139,7 +169,7 @@ function eat(snake, apples) {
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
-            snake.body.push({x: snake.head.x, y: snake.head.y});
+            snake.body.push({ x: snake.head.x, y: snake.head.y });
         }
     }
 }
@@ -236,7 +266,7 @@ function turn(snake, direction) {
     }
 }
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {
         turn(snake1, DIRECTION.LEFT);
     } else if (event.key === "ArrowRight") {
