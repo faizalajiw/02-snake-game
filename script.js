@@ -62,7 +62,7 @@ let level = [{
     },
     {
         //level 2
-        speed: 110,
+        speed: 100,
         wall: [{
             start: {
                 x: 5,
@@ -76,7 +76,7 @@ let level = [{
     },
     {
         //level 3
-        speed: 100,
+        speed: 80,
         wall: [{
                 start: {
                     x: 5,
@@ -101,7 +101,7 @@ let level = [{
     },
     {
         // level 4
-        speed: 90,
+        speed: 70,
         wall: [{
                 start: {
                     x: 0,
@@ -126,7 +126,7 @@ let level = [{
     },
     {
         // level 5
-        speed: 80,
+        speed: 50,
         wall: [{
                 start: {
                     x: 0,
