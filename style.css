@@ -7,3 +7,12 @@
     align-items: center;
     margin-left: 10%;
 }
+
+.text {
+    font-family: 'comic sans ms';
+    font-size: 35px;
+}
+
+html {
+    text-align: center;
+}
