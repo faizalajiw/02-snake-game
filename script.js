@@ -3,6 +3,8 @@ const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
+var valuecek;
+
 const DIRECTION = {
         LEFT: 0,
         RIGHT: 1,
@@ -18,6 +20,13 @@ function initPosition() {
     return {
         x: Math.floor(Math.random() * WIDTH),
         y: Math.floor(Math.random() * HEIGHT),
+    }
+}
+
+function initPositionwall() {
+    return {
+        x: 1,
+        y: 1,
     }
 }
 
@@ -97,6 +106,8 @@ let apples = [{
     }
 ]
 
+let wall ={position : initPositionwall()}
+
 function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -144,6 +155,7 @@ function draw() {
     setInterval(function() {
         let snakeCanvas = document.getElementById("snakeBoard");
         let ctx = snakeCanvas.getContext("2d");
+         
 
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
         // karakter ular1
@@ -186,7 +198,14 @@ function draw() {
         drawScore(snake2);
         drawScore(snake3);
         // drawNyawa(nyawa);
-    }, REDRAW_INTERVAL);
+        
+        if(valuecek){
+            var img2 = document.getElementById("wall");
+            ctx.drawImage(img2, wall.position.x * CELL_SIZE, wall.position.y * CELL_SIZE, 500, 20);
+        }
+    
+    }
+    ,REDRAW_INTERVAL);
 }
 
 function teleport(snake) {
@@ -204,6 +223,14 @@ function teleport(snake) {
     }
 }
 
+function cekwall(snake){
+    if(snake.head.x >= wall.position.x && snake.head.x < 18 && snake.head.y == wall.position.y){
+        alert("tembok");
+        valuecek = false;
+        ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    }
+}
+
 // apples array
 function eat(snake, apples) {
     var audio = new Audio('./assets/makan.mp3')
@@ -214,6 +241,12 @@ function eat(snake, apples) {
             apple.position = initPosition();
             snake.score++;
             snake.body.push({ x: snake.head.x, y: snake.head.y });
+            if(snake.score == 2){
+                alert("Next Level");
+                var Win = new Win ('./assets/Level.mp3')
+                Win.play();
+                create_wall_horizontal();
+            }
         }
     }
 }
@@ -222,24 +255,36 @@ function moveLeft(snake) {
     snake.head.x--;
     teleport(snake);
     eat(snake, apples);
+    if(valuecek){
+        cekwall(snake);
+    }
 }
 
 function moveRight(snake) {
     snake.head.x++;
     teleport(snake);
     eat(snake, apples);
+    if(valuecek){
+        cekwall(snake);
+    }
 }
 
 function moveDown(snake) {
     snake.head.y++;
     teleport(snake);
     eat(snake, apples);
+    if(valuecek){
+        cekwall(snake);
+    }
 }
 
 function moveUp(snake) {
     snake.head.y--;
     teleport(snake);
     eat(snake, apples);
+    if(valuecek){
+        cekwall(snake);
+    }
 }
 // Karakter tewas
 function checkCollision(snakes) {
@@ -250,6 +295,7 @@ function checkCollision(snakes) {
             for (let k = 1; k < snakes[j].body.length; k++) {
                 if (snakes[i].head.x == snakes[j].body[k].x && snakes[i].head.y == snakes[j].body[k].y) {
                     isCollide = true;
+                    valuecek = false;
                 }
             }
         }
@@ -289,6 +335,7 @@ function move(snake) {
         }, MOVE_INTERVAL);
     } else {
         initGame();
+        
     }
 }
 
@@ -347,6 +394,11 @@ function initGame() {
     move(snake1);
     move(snake2);
     move(snake3);
+}
+
+function create_wall_horizontal() {
+    valuecek = true;
+    
 }
 
 initGame();
