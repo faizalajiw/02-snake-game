@@ -225,7 +225,7 @@ function teleport(snake) {
 
 function cekwall(snake){
     if(snake.head.x >= wall.position.x && snake.head.x < 18 && snake.head.y == wall.position.y){
-        alert("tembok");
+        alert("Menabrak Dinding");
         valuecek = false;
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     }
@@ -243,8 +243,8 @@ function eat(snake, apples) {
             snake.body.push({ x: snake.head.x, y: snake.head.y });
             if(snake.score == 2){
                 alert("Next Level");
-                var Win = new Win ('./assets/Level.mp3')
-                Win.play();
+                var audio = new Audio ('./assets/Level.mp3')
+                audio.play();
                 create_wall_horizontal();
             }
         }
