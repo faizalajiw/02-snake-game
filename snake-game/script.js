@@ -1,5 +1,4 @@
 const CELL_SIZE = 20;
-// Soal no 1: Set canvas size menjadi 600
 const CANVAS_SIZE = 600;
 const REDRAW_INTERVAL = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
@@ -7,29 +6,29 @@ const HEIGHT = CANVAS_SIZE / CELL_SIZE;
 
 //Karakter ular 1
 const kepala1 = new Image();
-kepala1.src = "./assets/head1.png";
+kepala1.src = "./assets/head1copy.png";
 const bodi1 = new Image();
 bodi1.src = "./assets/pokemon.png";
 
 //Karakter ular 2
 const kepala2 = new Image();
-kepala2.src = "./assets/head2.png";
+kepala2.src = "./assets/head2copy.png";
 const bodi2 = new Image();
 bodi2.src = "./assets/pokemon.png";
 
 //Karakter ular 3
 const kepala3 = new Image();
-kepala3.src = "./assets/head3.png";
+kepala3.src = "./assets/head3copy.png";
 const bodi3 = new Image();
 bodi3.src = "./assets/pokemon.png";
 
 const DIRECTION = {
-        LEFT: 0,
-        RIGHT: 1,
-        UP: 2,
-        DOWN: 3,
-    }
-    // Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
+    LEFT: 0,
+    RIGHT: 1,
+    UP: 2,
+    DOWN: 3,
+}
+// Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
 const MOVE_INTERVAL = 120;
 
 function initPosition() {
@@ -61,19 +60,44 @@ function initSnake(color) {
     }
 }
 
-let snake1 = initSnake("purple");
-// let snake1 = {
-//     color: "red",
-//     ...initHeadAndBody(),
-//     direction: initDirection(),
-//     score: 0
-// }
+// deklarasi karakter ular
+let snake1 = {
+    color: "red",
+    ...initHeadAndBody(),
+    direction: initDirection(),
+    score: 0,
+}
+let snake2 = {
+    color: "blue",
+    ...initHeadAndBody(),
+    direction: initDirection(),
+    score: 0,
+}
+let snake3 = {
+    color: "blue",
+    ...initHeadAndBody(),
+    direction: initDirection(),
+    score: 0,
+}
+// Atur Karakter1
+const head1 = new Image();
+head1.src = "./assets/head1.png";
+const body1 = new Image();
+body1.src = "./assets/body1.png";
 
-let snake2 = initSnake("blue");
-// Soal no 6: add snake3
-let snake3 = initSnake("black");
+// Atur Karakter 2
+const head2 = new Image();
+head2.src = "./assets/head2.png";
+const body2 = new Image();
+body2.src = "./assets/body2.png";
 
-// Soal no 4: make apples array
+// Atur Karakter 3
+const head3 = new Image();
+head3.src = "./assets/head3.png";
+const body3 = new Image();
+body3.src = "./assets/body3.png";
+
+// deklarasi karakter apel
 let apples = [{
         color: "red",
         position: initPosition(),
@@ -89,7 +113,7 @@ function drawCell(ctx, x, y, color) {
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
 
-// Soal no 6: Pada fungsi drawScore, tambahkan score3Board:
+// Untuk menampilkan score board
 function drawScore(snake) {
     let scoreCanvas;
     if (snake.color == snake1.color) {
@@ -113,36 +137,34 @@ function draw() {
         let ctx = snakeCanvas.getContext("2d");
 
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-        //Ular 1
-        ctx.drawImage(kepala1, snake1.head.x * CELL_SIZE, snake1.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        // karakter ular1
+        ctx.drawImage(head1, snake1.head.x * CELL_SIZE, snake1.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake1.body.length; i++) {
-            ctx.drawImage(bodi1, snake1.body[i].x * CELL_SIZE, snake1.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            ctx.drawImage(body1, snake1.body[i].x * CELL_SIZE, snake1.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
-
-        //Ular 2
-        ctx.drawImage(kepala2, snake2.head.x * CELL_SIZE, snake2.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        
+        // karakter ular2
+        ctx.drawImage(head2, snake2.head.x * CELL_SIZE, snake2.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake2.body.length; i++) {
-            ctx.drawImage(bodi2, snake2.body[i].x * CELL_SIZE, snake2.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            ctx.drawImage(body2, snake2.body[i].x * CELL_SIZE, snake2.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
-        //Ular 3
-        ctx.drawImage(kepala3, snake3.head.x * CELL_SIZE, snake3.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        // karakter ular3
+        ctx.drawImage(head3, snake3.head.x * CELL_SIZE, snake3.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         for (let i = 1; i < snake3.body.length; i++) {
-            ctx.drawImage(bodi3, snake3.body[i].x * CELL_SIZE, snake3.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            ctx.drawImage(body3, snake3.body[i].x * CELL_SIZE, snake3.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
+        // karakter 2 apel
         for (let i = 0; i < apples.length; i++) {
             let apple = apples[i];
 
-            // Soal no 3: DrawImage apple dan gunakan image id:
             var img = document.getElementById("apple");
             ctx.drawImage(img, apple.position.x * CELL_SIZE, apple.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
         drawScore(snake1);
         drawScore(snake2);
-        // Soal no 6: Draw Player 3 Score:
         drawScore(snake3);
     }, REDRAW_INTERVAL);
 }
@@ -162,7 +184,7 @@ function teleport(snake) {
     }
 }
 
-// Soal no 4: Jadikan apples array
+// apples array
 function eat(snake, apples) {
     for (let i = 0; i < apples.length; i++) {
         let apple = apples[i];
@@ -197,7 +219,7 @@ function moveUp(snake) {
     teleport(snake);
     eat(snake, apples);
 }
-
+// Karakter tewas
 function checkCollision(snakes) {
     let isCollide = false;
     //this
@@ -211,7 +233,7 @@ function checkCollision(snakes) {
         }
     }
     if (isCollide) {
-        // Soal no 5: Add game over audio:
+        // game over audio:
         var audio = new Audio('./assets/game-over.mp3');
         audio.play();
 
@@ -238,7 +260,7 @@ function move(snake) {
             break;
     }
     moveBody(snake);
-    // Soal no 6: Check collision dengan snake3
+    // Check collision dengan snake3
     if (!checkCollision([snake1, snake2, snake3])) {
         setTimeout(function() {
             move(snake);
@@ -266,7 +288,8 @@ function turn(snake, direction) {
     }
 }
 
-document.addEventListener("keydown", function(event) {
+// Mengatur kendali snake1
+document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft") {
         turn(snake1, DIRECTION.LEFT);
     } else if (event.key === "ArrowRight") {
@@ -276,7 +299,7 @@ document.addEventListener("keydown", function(event) {
     } else if (event.key === "ArrowDown") {
         turn(snake1, DIRECTION.DOWN);
     }
-
+// Mengatur kendali snake2
     if (event.key === "a") {
         turn(snake2, DIRECTION.LEFT);
     } else if (event.key === "d") {
@@ -286,8 +309,7 @@ document.addEventListener("keydown", function(event) {
     } else if (event.key === "s") {
         turn(snake2, DIRECTION.DOWN);
     }
-
-    // Soal no 6: Add navigation snake3:
+// Mengatur kendali snake3
     if (event.key === "j") {
         turn(snake3, DIRECTION.LEFT);
     } else if (event.key === "l") {

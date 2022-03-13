@@ -7,18 +7,24 @@
 
 <body class="body" onload="draw();">
     <h1>Snake</h1>
-    <!-- Soal no 3: Tambahkan resource gambar untuk ditampilkan di canvas -->
+    <!-- Resource gambar untuk ditampilkan di canvas -->
     <img id="apple" style="display: none;" width="20" height="20" src="assets/apple.png" alt="Apple">
-    <!--Ular-->
-    <img id="ular" style="display: none;" width="20" height="20" src="assets/api2.pngs" alt="Ular1">
-    <img id="ular2" style="display: none;" width="20" height="20" src="assets/bola.png" alt="Ular2">
-    <img id="ular2" style="display: none;" width="20" height="20" src="assets/pokemon.png" alt="Ular3">
-    <!-- Soal no 1: Ubah nilai width dan height menjadi 600 pada element canvas:  -->
+    
+    <!-- karakter ular1 -->
+    <img id="head1" style="display: none;" width="20" height="20" src="assets/head1.png" alt="Snake">
+    <img id="body1" style="display: none;" width="20" height="20" src="assets/body1.png" alt="Snake">
+
+    <!-- karakter ular2 -->
+    <img id="head2" style="display: none;" width="20" height="20" src="assets/head2.png" alt="Snake">
+    <img id="body2" style="display: none;" width="20" height="20" src="assets/body2.png" alt="Snake">
+
+    <!-- karakter ular3 -->
+    <img id="head3" style="display: none;" width="20" height="20" src="assets/head3.png" alt="Snake">
+    <img id="body3" style="display: none;" width="20" height="20" src="assets/body2.png" alt="Snake">
+
     <canvas id="snakeBoard" width="600" height="600" style="border:5px solid #f80000;"></canvas>
     <canvas id="score1Board" width="100" height="100" style="border:3px solid #cf0fc6;"></canvas>
     <canvas id="score2Board" width="100" height="100" style="border:3px solid #0400ff;"></canvas>
-    <!-- Soal no 6: Tambahkan elemen canvas untuk menampilkan player3:  -->
     <canvas id="score3Board" width="100" height="100" style="border:3px solid #000000;"></canvas>
 </body>
-
 </html>
