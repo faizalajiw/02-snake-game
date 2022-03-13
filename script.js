@@ -287,7 +287,7 @@ function eat(snake, apples, drink) {
     }
     // Poison
     if (snake.head.x == drink.position.x && snake.head.y == drink.position.y) {
-        let AUDIO_EAT = new Audio('assets/.mp3');
+        let AUDIO_EAT = new Audio('assets/drink.mp3');
         drink.position = initPosition();
         snake.score++;
         snake.body.push({ x: snake.head.x, y: snake.head.y });
