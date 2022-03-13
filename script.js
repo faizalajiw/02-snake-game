@@ -253,7 +253,7 @@ function draw() {
         }
 
         if (checkPrime(snake.score)) {
-            insertImage(ctx, drink.position.x, drink.position.y, "poison");
+            insertImage(ctx, drink.position.x, drink.position.y, "potion");
         }
     }, REDRAW_INTERVAL);
 }
@@ -285,7 +285,7 @@ function eat(snake, apples, drink) {
             AUDIO_EAT.play();
         }
     }
-    // Poison
+    // Potion
     if (snake.head.x == drink.position.x && snake.head.y == drink.position.y) {
         let AUDIO_EAT = new Audio('assets/drink.mp3');
         drink.position = initPosition();
