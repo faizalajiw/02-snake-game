@@ -205,6 +205,7 @@ function getCurrentLevel(ctx, score) {
 
     move_interval = level[current_level].speed;
     ctx.fillText(`Level : ${current_level + 1}`, 500, 580);
+    ctx.fillStyle = 'white';
     if (current_level > 0) {
         drawWall(ctx, level[current_level].wall);
     }
