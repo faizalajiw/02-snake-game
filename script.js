@@ -69,7 +69,7 @@ let level = [{
     },
     {
         //level 2
-        speed: 110,
+        speed: 100,
         wall: [{
             start: {
                 x: 5,
@@ -83,7 +83,7 @@ let level = [{
     },
     {
         //level 3
-        speed: 100,
+        speed: 80,
         wall: [{
                 start: {
                     x: 5,
@@ -108,7 +108,7 @@ let level = [{
     },
     {
         // level 4
-        speed: 90,
+        speed: 70,
         wall: [{
                 start: {
                     x: 0,
@@ -133,7 +133,7 @@ let level = [{
     },
     {
         // level 5
-        speed: 80,
+        speed: 50,
         wall: [{
                 start: {
                     x: 0,
@@ -212,6 +212,7 @@ function getCurrentLevel(ctx, score) {
 
     move_interval = level[current_level].speed;
     ctx.fillText(`Level : ${current_level + 1}`, 500, 580);
+    ctx.fillStyle = 'white';
     if (current_level > 0) {
         drawWall(ctx, level[current_level].wall);
     }
