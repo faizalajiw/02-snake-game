@@ -41,8 +41,11 @@ function initSnake(color) {
         score: 0,
     }
 }
+
+// deklarasi variabel ular
 let snake = initSnake("blue");
 
+// deklarasi variabel apel
 let apples = [{
         position: initPosition(),
     },
@@ -51,11 +54,15 @@ let apples = [{
     }
 ];
 
+// deklarasi variabel nyawa
 let life = 3;
+
+// deklarasi variabel drink
 let drink = {
     position: initPosition(),
 };
 
+// deklarasi variabel level
 let level = [{
         //level 1
         speed: 120,
@@ -157,7 +164,7 @@ function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
-
+// memunculkan obstacle
 function drawWall(ctx, wall) {
     for (let i = 0; i < wall.length; i++) {
         let start = wall[i].start;
@@ -170,7 +177,7 @@ function drawWall(ctx, wall) {
         }
     }
 }
-
+// memanggil gambar
 function insertImage(ctx, x, y, name) {
     let image = document.createElement("img");
     image.src = `assets/${name}.png`;
