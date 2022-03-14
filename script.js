@@ -42,10 +42,10 @@ function initSnake(color) {
     }
 }
 
-// deklarasi variabel ular
+// ** deklarasi variabel ular
 let snake = initSnake("blue");
 
-// deklarasi variabel apel
+// ** deklarasi variabel apel
 let apples = [{
         position: initPosition(),
     },
@@ -54,21 +54,21 @@ let apples = [{
     }
 ];
 
-// deklarasi variabel nyawa
+// ** deklarasi variabel nyawa
 let life = 3;
 
-// deklarasi variabel drink
+// ** deklarasi variabel drink
 let drink = {
     position: initPosition(),
 };
 
-// deklarasi variabel level
+// ** deklarasi variabel level
 let level = [{
-        //level 1
+        // ** level 1
         speed: 120,
     },
     {
-        //level 2
+        // ** level 2
         speed: 100,
         wall: [{
             start: {
@@ -82,7 +82,7 @@ let level = [{
         }],
     },
     {
-        //level 3
+        // ** level 3
         speed: 80,
         wall: [{
                 start: {
@@ -107,7 +107,7 @@ let level = [{
         ],
     },
     {
-        // level 4
+        // ** level 4
         speed: 70,
         wall: [{
                 start: {
@@ -132,7 +132,7 @@ let level = [{
         ],
     },
     {
-        // level 5
+        // ** level 5
         speed: 50,
         wall: [{
                 start: {
@@ -164,7 +164,7 @@ function drawCell(ctx, x, y, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
-// memunculkan obstacle
+// ** memunculkan obstacle
 function drawWall(ctx, wall) {
     for (let i = 0; i < wall.length; i++) {
         let start = wall[i].start;
@@ -177,7 +177,7 @@ function drawWall(ctx, wall) {
         }
     }
 }
-// memanggil gambar
+// ** mengambil gambar
 function insertImage(ctx, x, y, name) {
     let image = document.createElement("img");
     image.src = `assets/${name}.png`;
@@ -186,12 +186,7 @@ function insertImage(ctx, x, y, name) {
 }
 
 function getCurrentLevel(ctx, score) {
-
-    if (score > 25) {
-        ctx.fillText(`WIN`, 500, 580);
-        return;
-    }
-
+    // ** Pengaturan score untuk tiap level
     if (score >= 0 && score < 5) {
         current_level = 0;
     } else if (score >= 5 && score < 10) {
@@ -202,14 +197,19 @@ function getCurrentLevel(ctx, score) {
         current_level = 3;
     } else if (score >= 20 && score < 25) {
         current_level = 4;
+    } else if (score >= 25) {
+        ctx.fillText(`MENANG`, 500, 580);
+        return;
     }
 
+    // ** sound ketika naik level
     if (current_level == next_level) {
         next_level++;
         let audio = new Audio('assets/level-up.mp3');
         audio.play();
     }
-
+    // ** menambahkan kecepatan ketika naik level dan menampilkan level board
+    // catatan: semakin rendah maka gerak karakter semakin cepat 
     move_interval = level[current_level].speed;
     ctx.fillText(`Level : ${current_level + 1}`, 500, 580);
     ctx.fillStyle = 'white';
@@ -217,7 +217,7 @@ function getCurrentLevel(ctx, score) {
         drawWall(ctx, level[current_level].wall);
     }
 }
-
+// ** logic untuk food lain
 function checkPrime(number) {
     if (number < 2) {
         return false;
@@ -237,35 +237,35 @@ function draw() {
         let ctx = snakeCanvas.getContext("2d");
 
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
+        // ** memasukkan gambar kepala ular
         insertImage(ctx, snake.head.x, snake.head.y, "head1");
-
+        // ** memasukkan gambar tubuh ular
         for (let i = 1; i < snake.body.length; i++) {
             insertImage(ctx, snake.body[i].x, snake.body[i].y, "body1");
         }
 
         ctx.color = snake.color;
         ctx.font = "20px Arial";
-
+        // ** menampilkan score dan speed board
         getCurrentLevel(ctx, snake.score);
         ctx.fillText("Score : " + snake.score, 485, 30);
         ctx.fillText("Speed : " + level[current_level].speed, 485, 50);
-
+        // ** memasukkan gambar apel
         for (let i = 0; i < apples.length; i++) {
             let apple = apples[i];
             insertImage(ctx, apple.position.x, apple.position.y, "apple");
         }
-
+        // ** memasukkan gambar nyawa
         for (let i = 0; i < life; i++) {
             insertImage(ctx, i, 0, "heart");
         }
-
+        // ** memasukkan gambar food lain (drink=potion)
         if (checkPrime(snake.score)) {
             insertImage(ctx, drink.position.x, drink.position.y, "potion");
         }
     }, REDRAW_INTERVAL);
 }
-// agar ular bisa tembus
+// ** agar ular bisa tembus dinding luar
 function teleport(snake) {
     if (snake.head.x < 0) {
         snake.head.x = CANVAS_SIZE / CELL_SIZE - 1;
@@ -280,12 +280,13 @@ function teleport(snake) {
         snake.head.y = 0;
     }
 }
-
+// ** Makanan Ular
 function eat(snake, apples, drink) {
-    // Apel
+    // ** Apel
     for (let i = 0; i < apples.length; i++) {
         let apple = apples[i];
-        let AUDIO_EAT = new Audio('assets/eat.mp3');
+        // ** sound ketika makan apel
+        let AUDIO_EAT = new Audio('assets/food.mp3');
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
@@ -293,8 +294,9 @@ function eat(snake, apples, drink) {
             AUDIO_EAT.play();
         }
     }
-    // Potion
+    // ** Potion
     if (snake.head.x == drink.position.x && snake.head.y == drink.position.y) {
+        // ** sound ketika minum drink(potion)
         let AUDIO_EAT = new Audio('assets/drink.mp3');
         drink.position = initPosition();
         snake.score++;
@@ -331,14 +333,14 @@ function moveUp(snake) {
 function checkCollision() {
     let isCollide = false;
 
-    // cek collision antara snake head dan snake body
+    // ** cek collision antara snake head dan snake body
     for (let i = 1; i < snake.body.length; i++) {
         if (snake.head.x == snake.body[i].x && snake.head.y == snake.body[i].y) {
             isCollide = true;
         }
     }
 
-    // cek collision antara snake head dan wall
+    // ** cek collision antara snake head dan wall
     if (current_level > 0) {
         let wall = level[current_level].wall;
         for (let i = 0; i < wall.length; i++) {
@@ -352,7 +354,7 @@ function checkCollision() {
         life--;
         snake.body.splice(0, snake.body.length);
         snake.body.push({ x: snake.head.x, y: snake.head.y });
-        // sound game over
+        // ** sound game over
         if (life == 0) {
             let audio = new Audio('assets/game-over.mp3');
             audio.play();
@@ -390,12 +392,12 @@ function move(snake) {
         initGame();
     }
 }
-// menambah badan
+// ** menambah badan
 function moveBody(snake) {
     snake.body.unshift({ x: snake.head.x, y: snake.head.y });
     snake.body.pop();
 }
-// mengatur navigasi ular
+// ** mengatur navigasi ular
 function turn(snake, direction) {
     const oppositeDirections = {
         [DIRECTION.LEFT]: DIRECTION.RIGHT,
@@ -408,7 +410,7 @@ function turn(snake, direction) {
         snake.direction = direction;
     }
 }
-// mengatur navigasi ular
+// ** mengatur navigasi ular
 document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {
         turn(snake, DIRECTION.LEFT);
